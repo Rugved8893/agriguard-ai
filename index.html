@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AgriGuard AI | Predictive Relief</title>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f3fff8, #e9fdf3);
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 20px;
+}
+.card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+h1 {
+    color: #0a7a4b;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+p {
+    color: #555;
+    margin-bottom: 30px;
+}
+label {
+    font-weight: 600;
+    color: #333;
+}
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0 25px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+button {
+    background: #0a7a4b;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+button:hover {
+    background: #065c38;
+}
+.badge {
+    display: inline-block;
+    background: #dff5eb;
+    color: #0a7a4b;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <div class="card">
+        <span class="badge">🌱 AI-Based Agriculture Relief System</span>
+        <h1>Predictive Security for Every Acre</h1>
+        <p>Analyze disaster risk and estimated crop loss using machine learning models.</p>
+
+        <form action="/predict" method="post">
+            <label>Rainfall (mm)</label>
+            <input type="number" name="rainfall" required>
+
+            <label>Temperature (°C)</label>
+            <input type="number" name="temperature" required>
+
+            <button type="submit">Analyze Risk →</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
