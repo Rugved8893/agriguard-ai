@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Programs | AgriGuard AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a7a4b;
+            --secondary: #27ae60;
+            --dark: #1a1a1a;
+            --bg: #f8faf9;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; }
+        
+        .sidebar { width: 260px; height: 100vh; background: var(--dark); color: white; padding: 25px; position: fixed; }
+        .sidebar h2 { color: var(--secondary); font-size: 22px; margin-bottom: 30px; }
+        .nav-item { padding: 15px; border-radius: 8px; cursor: pointer; color: #bbb; transition: 0.3s; margin-bottom: 5px; }
+        .nav-item:hover, .nav-item.active { background: rgba(39, 174, 96, 0.2); color: white; }
+
+        .main { margin-left: 300px; padding: 40px; width: calc(100% - 300px); }
+        .header { margin-bottom: 30px; }
+        .badge { background: #dff5eb; color: var(--primary); padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .card-header i { font-size: 28px; color: var(--secondary); }
+        .card-header h3 { margin: 0; color: var(--dark); }
+        
+        .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .info-row:last-child { border-bottom: none; }
+        .label { color: #666; font-weight: 500; }
+        .value { color: var(--dark); font-weight: 600; }
+        
+        .description { color: #555; line-height: 1.6; margin-bottom: 15px; }
+        
+        .btn { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; margin-top: 15px; transition: 0.3s; }
+        .btn:hover { background: var(--secondary); }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fa-solid fa-leaf"></i> AgriGuard AI</h2>
+        <div class="nav-item" onclick="window.location='/'"><i class="fa-solid fa-chart-line"></i> Risk Analytics</div>
+        <div class="nav-item" onclick="window.location='/government'"><i class="fa-solid fa-building-columns"></i> Government Bodies</div>
+        <div class="nav-item" onclick="window.location='/ngo'"><i class="fa-solid fa-hands-helping"></i> NGO</div>
+        <div class="nav-item" onclick="window.location='/dashboard'"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
+        <div class="nav-item" onclick="window.location='/suppliers'"><i class="fa-solid fa-shop"></i> Fertilizer Suppliers</div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <span class="badge">NGO PROGRAMS</span>
+            <h1>NGO Agricultural Programs</h1>
+            <p>Discover NGO initiatives supporting farmers with aid, training, and resources</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-seedling"></i>
+                    <h3>Green Earth Foundation</h3>
+                </div>
+                <p class="description">Provides organic farming training and free seeds to small farmers. Focus on sustainable agriculture practices.</p>
+                <div class="info-row">
+                    <span class="label">Program Type</span>
+                    <span class="value">Training & Seeds</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Coverage</span>
+                    <span class="value">Pan India</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Contact</span>
+                    <span class="value">info@greenearth.org</span>
+                </div>
+                <a href="#" class="btn">Get Support</a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-leaf"></i>
+                    <h3>Farmers First Alliance</h3>
+                </div>
+                <p class="description">Micro-finance support and technical assistance for rural farmers. Helps with market access and fair pricing.</p>
+                <div class="info-row">
+                    <span class="label">Program Type</span>
+                    <span class="value">Micro-finance</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Coverage</span>
+                    <span class="value">Rural Areas</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Contact</span>
+                    <span class="value">support@farmersfirst.org</span>
+                </div>
+                <a href="#" class="btn">Get Support</a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-droplet"></i>
+                    <h3>Water for All Initiative</h3>
+                </div>
+                <p class="description">Installation of rainwater harvesting systems and drip irrigation. Drought-resistant farming techniques training.</p>
+                <div class="info-row">
+                    <span class="label">Program Type</span>
+                    <span class="value">Irrigation Support</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Coverage</span>
+                    <span class="value">Drought-prone Areas</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Contact</span>
+                    <span class="value">help@waterforall.org</span>
+                </div>
+                <a href="#" class="btn">Get Support</a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-school"></i>
+                    <h3>Agri-Education Trust</h3>
+                </div>
+                <p class="description">Free agricultural education and modern farming techniques. Women's empowerment through farming cooperatives.</p>
+                <div class="info-row">
+                    <span class="label">Program Type</span>
+                    <span class="value">Education & Training</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Coverage</span>
+                    <span class="value">All States</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Contact</span>
+                    <span class="value">learn@agriedu.org</span>
+                </div>
+                <a href="#" class="btn">Get Support</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

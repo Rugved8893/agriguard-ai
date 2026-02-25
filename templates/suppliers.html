@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizer Suppliers | AgriGuard AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a7a4b;
+            --secondary: #27ae60;
+            --dark: #1a1a1a;
+            --bg: #f8faf9;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; }
+        
+        .sidebar { width: 260px; height: 100vh; background: var(--dark); color: white; padding: 25px; position: fixed; }
+        .sidebar h2 { color: var(--secondary); font-size: 22px; margin-bottom: 30px; }
+        .nav-item { padding: 15px; border-radius: 8px; cursor: pointer; color: #bbb; transition: 0.3s; margin-bottom: 5px; }
+        .nav-item:hover, .nav-item.active { background: rgba(39, 174, 96, 0.2); color: white; }
+
+        .main { margin-left: 300px; padding: 40px; width: calc(100% - 300px); }
+        .header { margin-bottom: 30px; }
+        .badge { background: #dff5eb; color: var(--primary); padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .card-header i { font-size: 32px; color: var(--primary); }
+        .card-header h3 { margin: 0; color: var(--dark); }
+        
+        .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .info-row:last-child { border-bottom: none; }
+        .label { color: #666; font-weight: 500; }
+        .value { color: var(--dark); font-weight: 600; }
+        
+        .products { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+        .product-tag { background: #f0f7f4; color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s; flex: 1; text-align: center; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--secondary); }
+        .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+        
+        .rating { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fa-solid fa-leaf"></i> AgriGuard AI</h2>
+        <div class="nav-item" onclick="window.location='/'"><i class="fa-solid fa-chart-line"></i> Risk Analytics</div>
+        <div class="nav-item" onclick="window.location='/government'"><i class="fa-solid fa-building-columns"></i> Government Bodies</div>
+        <div class="nav-item" onclick="window.location='/ngo'"><i class="fa-solid fa-hands-helping"></i> NGO</div>
+        <div class="nav-item" onclick="window.location='/dashboard'"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
+        <div class="nav-item" onclick="window.location='/suppliers'"><i class="fa-solid fa-shop"></i> Fertilizer Suppliers</div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <span class="badge">FERTILIZER SUPPLIERS</span>
+            <h1>Trusted Fertilizer Suppliers</h1>
+            <p>Find reliable fertilizer suppliers for your agricultural needs</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-shop"></i>
+                    <div>
+                        <h3>AgriChem Solutions</h3>
+                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> 4.8</span>
+                    </div>
+                </div>
+                <div class="products">
+                    <span class="product-tag">Urea</span>
+                    <span class="product-tag">DAP</span>
+                    <span class="product-tag">NPK</span>
+                    <span class="product-tag">Organic</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Location</span>
+                    <span class="value">District HQ</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Delivery</span>
+                    <span class="value">Available (Free)</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Phone</span>
+                    <span class="value">+91 98765 43210</span>
+                </div>
+                <div class="btn-group">
+                    <a href="tel:+919876543210" class="btn btn-primary">Call Now</a>
+                    <a href="#" class="btn btn-outline">View Products</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-shop"></i>
+                    <div>
+                        <h3>Farm King Agro</h3>
+                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> 4.2</span>
+                    </div>
+                </div>
+                <div class="products">
+                    <span class="product-tag">Urea</span>
+                    <span class="product-tag">Potash</span>
+                    <span class="product-tag">Vermicompost</span>
+                    <span class="product-tag">Pesticides</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Location</span>
+                    <span class="value">Taluka Center</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Delivery</span>
+                    <span class="value">Available (₹100)</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Phone</span>
+                    <span class="value">+91 98765 12345</span>
+                </div>
+                <div class="btn-group">
+                    <a href="tel:+919876512345" class="btn btn-primary">Call Now</a>
+                    <a href="#" class="btn btn-outline">View Products</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-shop"></i>
+                    <div>
+                        <h3>GreenGrow Fertilizers</h3>
+                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 4.9</span>
+                    </div>
+                </div>
+                <div class="products">
+                    <span class="product-tag">Organic</span>
+                    <span class="product-tag">Bio-fertilizers</span>
+                    <span class="product-tag">Compost</span>
+                    <span class="product-tag">Micronutrients</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Location</span>
+                    <span class="value">Block HQ</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Delivery</span>
+                    <span class="value">Available (Free)</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Phone</span>
+                    <span class="value">+91 94567 89012</span>
+                </div>
+                <div class="btn-group">
+                    <a href="tel:+919456789012" class="btn btn-primary">Call Now</a>
+                    <a href="#" class="btn btn-outline">View Products</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-shop"></i>
+                    <div>
+                        <h3>Krishi Bazar</h3>
+                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i> 3.9</span>
+                    </div>
+                </div>
+                <div class="products">
+                    <span class="product-tag">Urea</span>
+                    <span class="product-tag">DAP</span>
+                    <span class="product-tag">SSP</span>
+                    <span class="product-tag">Insecticides</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Location</span>
+                    <span class="value">Village Market</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Delivery</span>
+                    <span class="value">Pickup Only</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Phone</span>
+                    <span class="value">+91 87654 32109</span>
+                </div>
+                <div class="btn-group">
+                    <a href="tel:+918765432109" class="btn btn-primary">Call Now</a>
+                    <a href="#" class="btn btn-outline">View Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
