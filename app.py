@@ -2,7 +2,7 @@ import os
 import json
 from flask import Flask, render_template, request, url_for, jsonify, session
 from model import predict_crop_high_level
-from ai_knowledge import AIFarmingAssistant
+from ai_agent_updated import UniversalAI
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -13,8 +13,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'agriguard_ai_secret_key_2024'  # For session management
 os.makedirs(UPLOAD_FOLDER, exist_ok=True) # Creates folder if it doesn't exist
 
-# Initialize AI Assistant
-ai_assistant = AIFarmingAssistant()
+# Initialize AI Assistant - The Universal AI that can answer ANY question!
+ai_assistant = UniversalAI()
 
 # Language translations for the interface
 LANGUAGES = {
