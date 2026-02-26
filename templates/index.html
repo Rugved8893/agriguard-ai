@@ -47,48 +47,288 @@
             width: 100%; background: var(--primary); color: white; border: none; padding: 16px; 
             border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
-        button:hover { background: var(--secondary); transform: translateY(-2px); }
+        button:hover { background: #059654; }
 
-        .info-card { background: #fff; border: 1px solid #eef2f0; }
-        .stat-box { background: #f0f7f4; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--primary); }
+        /* Language Selection Modal */
+        .lang-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        .lang-modal.active { display: flex; }
+        .lang-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+        .lang-content h2 { color: var(--primary); margin-bottom: 10px; }
+        .lang-content p { color: #666; margin-bottom: 30px; }
+        .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .lang-btn {
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: white;
+        }
+        .lang-btn:hover { border-color: var(--primary); background: #f0fdf4; }
+        .lang-btn .native { font-size: 18px; font-weight: bold; color: var(--dark); }
+        .lang-btn .name { font-size: 12px; color: #888; }
+
+        /* AI Chatbot */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(10, 122, 75, 0.3);
+            z-index: 9999;
+            transition: transform 0.3s;
+        }
+        .chatbot-toggle:hover { transform: scale(1.1); }
+        .chatbot-toggle i { font-size: 28px; color: white; }
+
+        .chatbot-modal {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            width: 420px;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            z-index: 9998;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chatbot-modal.active { display: flex; }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .chat-header img { width: 40px; height: 40px; border-radius: 50%; }
+        .chat-header h3 { margin: 0; font-size: 16px; }
+        .chat-header p { margin: 0; font-size: 12px; opacity: 0.8; }
+        .chat-close { margin-left: auto; cursor: pointer; font-size: 20px; }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8faf9;
+        }
+        .message { margin-bottom: 15px; max-width: 85%; }
+        .message.ai { margin-right: auto; }
+        .message.user { margin-left: auto; text-align: right; }
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        .message.ai .message-content { background: white; border: 1px solid #eee; border-bottom-left-radius: 4px; }
+        .message.user .message-content { background: var(--primary); color: white; border-bottom-right-radius: 4px; }
+
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+        .chat-input button {
+            width: auto;
+            padding: 12px 20px;
+            border-radius: 25px;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px;
+            color: #888;
+            font-size: 13px;
+        }
+        .typing-indicator.active { display: block; }
+
+        .lang-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .lang-indicator i { color: var(--primary); }
+
+        .info-card h3 { color: var(--dark); margin-top: 0; }
+        .stat-box { background: #f8faf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .stat-box strong { color: var(--primary); }
+
+        /* Image Analysis Section */
+        .analysis-result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+        }
+        .analysis-result.active { display: block; }
+        .confidence-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .treatment-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .treatment-box h4 { margin: 0 0 10px; color: var(--dark); }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2><i class="fa-solid fa-leaf"></i> AgriGuard AI</h2>
-        <div class="nav-item active" onclick="window.location='/'"><i class="fa-solid fa-chart-line"></i> Risk Analytics</div>
-        <div class="nav-item" onclick="window.location='/government'"><i class="fa-solid fa-building-columns"></i> Government Bodies</div>
-        <div class="nav-item" onclick="window.location='/ngo'"><i class="fa-solid fa-hands-helping"></i> NGO</div>
-        <div class="nav-item" onclick="window.location='/dashboard'"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
-        <div class="nav-item" onclick="window.location='/suppliers'"><i class="fa-solid fa-shop"></i> Fertilizer Suppliers</div>
+
+    <!-- Language Selection Modal -->
+    <div class="lang-modal" id="langModal">
+        <div class="lang-content">
+            <h2><i class="fa-solid fa-globe"></i> Select Your Language</h2>
+            <p>Choose your preferred language for the best experience</p>
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="selectLanguage('en')">
+                    <div class="native">English</div>
+                    <div class="name">English</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('hi')">
+                    <div class="native">हिंदी</div>
+                    <div class="name">Hindi</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('ta')">
+                    <div class="native">தமிழ்</div>
+                    <div class="name">Tamil</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('te')">
+                    <div class="native">తెలుగు</div>
+                    <div class="name">Telugu</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('bn')">
+                    <div class="native">বাংলা</div>
+                    <div class="name">Bengali</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('mr')">
+                    <div class="native">मराठी</div>
+                    <div class="name">Marathi</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('gu')">
+                    <div class="native">ગુજરાતી</div>
+                    <div class="name">Gujarati</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('kn')">
+                    <div class="native">ಕನ್ನಡ</div>
+                    <div class="name">Kannada</div>
+                </button>
+                <button class="lang-btn" onclick="selectLanguage('ml')">
+                    <div class="native">മലയാളം</div>
+                    <div class="name">Malayalam</div>
+                </button>
+            </div>
+        </div>
     </div>
 
+    <!-- Language Indicator -->
+    <div class="lang-indicator" onclick="showLangModal()">
+        <i class="fa-solid fa-globe"></i>
+        <span id="currentLangName">English</span>
+    </div>
+
+    <!-- Navigation Sidebar -->
+    <div class="sidebar">
+        <h2><i class="fa-solid fa-leaf"></i> AgriGuard AI</h2>
+        <div class="nav-item active"><i class="fa-solid fa-house"></i> &nbsp; Home</div>
+        <div class="nav-item" onclick="window.location.href='/dashboard'"><i class="fa-solid fa-chart-line"></i> &nbsp; Dashboard</div>
+        <div class="nav-item" onclick="window.location.href='/government'"><i class="fa-solid fa-building-columns"></i> &nbsp; Government</div>
+        <div class="nav-item" onclick="window.location.href='/ngo'"><i class="fa-solid fa-hands-helping"></i> &nbsp; NGO</div>
+        <div class="nav-item" onclick="window.location.href='/suppliers'"><i class="fa-solid fa-store"></i> &nbsp; Suppliers</div>
+    </div>
+
+    <!-- Main Content -->
     <div class="main">
         <div class="header">
-            <span class="badge">V2.0 HIGH-LEVEL SYSTEM</span>
-            <h1>Diagnostic Command Center</h1>
-            <p>Integrated Multi-Factor Risk Assessment Engine</p>
+            <h1>Crop Risk Analysis</h1>
+            <span class="badge">AI-POWERED</span>
         </div>
 
         <div class="grid-container">
+            <!-- Analysis Form -->
             <div class="card">
-                <h3><i class="fa-solid fa-microscope"></i> Field Diagnostics</h3>
-                <form action="/predict" method="post" enctype="multipart/form-data">
+                <h3 style="margin-top:0;"><i class="fa-solid fa-microscope"></i> Field Analysis</h3>
+                <form action="/predict" method="POST" enctype="multipart/form-data">
                     <div class="input-group">
-                        <label>Select Primary Crop</label>
-                        <select name="crop_type">
+                        <label>Select Crop Type</label>
+                        <select name="crop_type" required>
+                            <option value="">-- Select Crop --</option>
                             <option value="Rice">Rice</option>
                             <option value="Wheat">Wheat</option>
-                            <option value="Maize">Maize</option>
                             <option value="Sugarcane">Sugarcane</option>
+                            <option value="Maize">Maize</option>
                         </select>
                     </div>
 
-                    <label>Leaf Image Scan (AI Visual Diagnosis)</label>
-                    <div class="upload-area" onclick="document.getElementById('fileInput').click();">
-                        <i class="fa-solid fa-cloud-arrow-up fa-2x" style="color: #888;"></i>
-                        <p id="fileName">Click to upload or drag leaf sample image</p>
-                        <input type="file" id="fileInput" name="leaf_image" style="display:none;" onchange="updateName(this)">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fa-solid fa-cloud-upload-alt fa-2x" style="color:#ccc;"></i>
+                        <p id="fileName">Upload Leaf Image (Optional) - AI will analyze for diseases</p>
+                        <input type="file" name="leaf_image" id="leafImage" accept="image/*" style="display:none;" onchange="updateName(this)">
+                    </div>
+
+                    <!-- AI Image Analysis Result -->
+                    <div class="analysis-result" id="analysisResult">
+                        <div class="confidence-badge" id="confidenceBadge">95% Confidence</div>
+                        <h4 id="diseaseName">Leaf Blight Detected</h4>
+                        <p id="diseaseDesc">Moderate severity fungal infection detected.</p>
+                        <div class="treatment-box">
+                            <h4><i class="fa-solid fa-prescription-bottle"></i> Recommended Treatment</h4>
+                            <p id="treatmentText">Apply Mancozeb 75% WP @ 2.5g/L</p>
+                        </div>
                     </div>
 
                     <div style="display: flex; gap: 15px;">
@@ -125,18 +365,206 @@
                 <div class="stat-box">
                     <strong>Environmental Drift:</strong> Accounts for humidity spikes which often trigger fungal pathogen alerts.
                 </div>
+                <div class="stat-box">
+                    <strong>AI Disease Detection:</strong> Upload leaf images for instant disease identification and treatment recommendations.
+                </div>
                 
                 <p style="font-size: 12px; color: #666; line-height: 1.6;">
-                    <strong>Big Level Advantage:</strong> This system uses prescriptive analytics—moving from simple "Risk Percentages" to actionable "Mitigation Strategies."
+                    <strong>AgriGuard Advantage:</strong> This system uses prescriptive analytics—moving from simple "Risk Percentages" to actionable "Mitigation Strategies" powered by artificial intelligence.
                 </p>
             </div>
         </div>
     </div>
 
+    <!-- AI Chatbot Toggle -->
+    <div class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <!-- AI Chatbot Modal -->
+    <div class="chatbot-modal" id="chatbotModal">
+        <div class="chat-header">
+            <i class="fa-solid fa-robot fa-2x"></i>
+            <div>
+                <h3>AgriGuard AI Assistant</h3>
+                <p>Online • Ready to help</p>
+            </div>
+            <div class="chat-close" onclick="toggleChatbot()">
+                <i class="fa-solid fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message ai">
+                <div class="message-content" id="welcomeMessage">👋 Namaste! Welcome to AgriGuard AI Assistant!
+
+I'm your personal farming expert, available 24/7 to help you with:
+
+🌾 Crop Management - Planting schedules, variety selection
+🦠 Disease & Pest Control - Identification and treatment
+💧 Irrigation Planning - Water management
+🧪 Soil Health - pH optimization
+📊 Yield Optimization - Maximize your harvest
+
+How can I help you today?</div>
+            </div>
+            <div class="typing-indicator" id="typingIndicator">
+                <i class="fa-solid fa-ellipsis"></i> AI is thinking...
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ask me anything about farming..." onkeypress="handleChatKeypress(event)">
+            <button onclick="sendMessage()" style="width: auto; padding: 12px 20px;">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
     <script>
+        // Language translations for chatbot
+        const langNames = {
+            'en': 'English',
+            'hi': 'हिंदी',
+            'ta': 'தமிழ்',
+            'te': 'తెలుగు',
+            'bn': 'বাংলা',
+            'mr': 'मराठी',
+            'gu': 'ગુજરાતી',
+            'kn': 'ಕನ್ನಡ',
+            'ml': 'മലയാളം'
+        };
+
+        // Check if language is selected on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('agriguard_language');
+            if (!savedLang) {
+                document.getElementById('langModal').classList.add('active');
+            } else {
+                document.getElementById('currentLangName').textContent = langNames[savedLang] || 'English';
+            }
+            
+            // Set up image upload handler
+            document.getElementById('uploadArea').addEventListener('click', function() {
+                document.getElementById('leafImage').click();
+            });
+        });
+
+        function selectLanguage(lang) {
+            localStorage.setItem('agriguard_language', lang);
+            document.getElementById('langModal').classList.remove('active');
+            document.getElementById('currentLangName').textContent = langNames[lang] || 'English';
+            
+            // Save to server
+            fetch('/set_language', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({language: lang})
+            });
+        }
+
+        function showLangModal() {
+            document.getElementById('langModal').classList.add('active');
+        }
+
         function updateName(input) {
-            var fileName = input.files[0].name;
-            document.getElementById('fileName').innerHTML = "Selected: <b>" + fileName + "</b>";
+            if (input.files && input.files[0]) {
+                var fileName = input.files[0].name;
+                document.getElementById('fileName').innerHTML = "Selected: <b>" + fileName + "</b>";
+                
+                // Analyze the image with AI
+                analyzeImage(input.files[0]);
+            }
+        }
+
+        async function analyzeImage(imageFile) {
+            const formData = new FormData();
+            formData.append('image', imageFile);
+
+            try {
+                const response = await fetch('/analyze_image', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    const result = data.analysis;
+                    document.getElementById('confidenceBadge').textContent = result.confidence + '% Confidence';
+                    document.getElementById('diseaseName').textContent = result.disease;
+                    document.getElementById('diseaseDesc').textContent = result.description;
+                    document.getElementById('treatmentText').textContent = result.treatment.chemical;
+                    document.getElementById('analysisResult').classList.add('active');
+                }
+            } catch (error) {
+                console.error('Error analyzing image:', error);
+            }
+        }
+
+        function toggleChatbot() {
+            document.getElementById('chatbotModal').classList.toggle('active');
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show typing indicator
+            document.getElementById('typingIndicator').classList.add('active');
+            scrollToBottom();
+
+            try {
+                const response = await fetch('/ai_chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        message: message,
+                        crop_type: null
+                    })
+                });
+                
+                const data = await response.json();
+                document.getElementById('typingIndicator').classList.remove('active');
+                
+                if (data.status === 'success') {
+                    addMessage(data.response, 'ai');
+                } else {
+                    addMessage('Sorry, I encountered an error. Please try again.', 'ai');
+                }
+            } catch (error) {
+                document.getElementById('typingIndicator').classList.remove('active');
+                addMessage('Sorry, I could not connect to the server. Please try again.', 'ai');
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + sender;
+            messageDiv.innerHTML = '<div class="message-content">' + text + '</div>';
+            
+            // Insert before typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            messagesContainer.insertBefore(messageDiv, typingIndicator);
+            
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
     </script>
 </body>
