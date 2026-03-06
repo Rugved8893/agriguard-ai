@@ -46,6 +46,8 @@
         .btn-outline:hover { background: var(--primary); color: white; }
         
         .rating { color: #f39c12; }
+        
+        .no-data { text-align: center; padding: 40px; color: #666; }
     </style>
 </head>
 <body>
@@ -55,7 +57,7 @@
         <div class="nav-item" onclick="window.location='/government'"><i class="fa-solid fa-building-columns"></i> Government Bodies</div>
         <div class="nav-item" onclick="window.location='/ngo'"><i class="fa-solid fa-hands-helping"></i> NGO</div>
         <div class="nav-item" onclick="window.location='/dashboard'"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
-        <div class="nav-item" onclick="window.location='/suppliers'"><i class="fa-solid fa-shop"></i> Fertilizer Suppliers</div>
+        <div class="nav-item active" onclick="window.location='/suppliers'"><i class="fa-solid fa-shop"></i> Fertilizer Suppliers</div>
     </div>
 
     <div class="main">
@@ -65,135 +67,58 @@
             <p>Find reliable fertilizer suppliers for your agricultural needs</p>
         </div>
 
+        {% if suppliers %}
         <div class="grid">
+            {% for supplier in suppliers %}
             <div class="card">
                 <div class="card-header">
                     <i class="fa-solid fa-shop"></i>
                     <div>
-                        <h3>AgriChem Solutions</h3>
-                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> 4.8</span>
+                        <h3>{{ supplier.supplier_name }}</h3>
+                        <span class="rating">
+                            {% for i in range(5) %}
+                                {% if i < supplier.rating|int %}
+                                    <i class="fa-solid fa-star"></i>
+                                {% elif i < supplier.rating %}
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                            {{ supplier.rating }}
+                        </span>
                     </div>
                 </div>
                 <div class="products">
-                    <span class="product-tag">Urea</span>
-                    <span class="product-tag">DAP</span>
-                    <span class="product-tag">NPK</span>
-                    <span class="product-tag">Organic</span>
+                    {% for product in supplier.products.split(',') %}
+                    <span class="product-tag">{{ product.strip() }}</span>
+                    {% endfor %}
                 </div>
                 <div class="info-row">
                     <span class="label">Location</span>
-                    <span class="value">District HQ</span>
+                    <span class="value">{{ supplier.location }}</span>
                 </div>
                 <div class="info-row">
                     <span class="label">Delivery</span>
-                    <span class="value">Available (Free)</span>
+                    <span class="value">{{ supplier.delivery_available }} {% if supplier.delivery_charge != 'Free' and supplier.delivery_charge != 'Pickup Only' %}({{ supplier.delivery_charge }}){% endif %}</span>
                 </div>
                 <div class="info-row">
                     <span class="label">Phone</span>
-                    <span class="value">+91 98765 43210</span>
+                    <span class="value">{{ supplier.phone }}</span>
                 </div>
                 <div class="btn-group">
-                    <a href="tel:+919876543210" class="btn btn-primary">Call Now</a>
-                    <a href="#" class="btn btn-outline">View Products</a>
+                    <a href="tel:{{ supplier.phone }}" class="btn btn-primary">Call Now</a>
+                    <a href="mailto:{{ supplier.email }}" class="btn btn-outline">Email</a>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-shop"></i>
-                    <div>
-                        <h3>Farm King Agro</h3>
-                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> 4.2</span>
-                    </div>
-                </div>
-                <div class="products">
-                    <span class="product-tag">Urea</span>
-                    <span class="product-tag">Potash</span>
-                    <span class="product-tag">Vermicompost</span>
-                    <span class="product-tag">Pesticides</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Location</span>
-                    <span class="value">Taluka Center</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Delivery</span>
-                    <span class="value">Available (₹100)</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Phone</span>
-                    <span class="value">+91 98765 12345</span>
-                </div>
-                <div class="btn-group">
-                    <a href="tel:+919876512345" class="btn btn-primary">Call Now</a>
-                    <a href="#" class="btn btn-outline">View Products</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-shop"></i>
-                    <div>
-                        <h3>GreenGrow Fertilizers</h3>
-                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 4.9</span>
-                    </div>
-                </div>
-                <div class="products">
-                    <span class="product-tag">Organic</span>
-                    <span class="product-tag">Bio-fertilizers</span>
-                    <span class="product-tag">Compost</span>
-                    <span class="product-tag">Micronutrients</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Location</span>
-                    <span class="value">Block HQ</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Delivery</span>
-                    <span class="value">Available (Free)</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Phone</span>
-                    <span class="value">+91 94567 89012</span>
-                </div>
-                <div class="btn-group">
-                    <a href="tel:+919456789012" class="btn btn-primary">Call Now</a>
-                    <a href="#" class="btn btn-outline">View Products</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-shop"></i>
-                    <div>
-                        <h3>Krishi Bazar</h3>
-                        <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i> 3.9</span>
-                    </div>
-                </div>
-                <div class="products">
-                    <span class="product-tag">Urea</span>
-                    <span class="product-tag">DAP</span>
-                    <span class="product-tag">SSP</span>
-                    <span class="product-tag">Insecticides</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Location</span>
-                    <span class="value">Village Market</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Delivery</span>
-                    <span class="value">Pickup Only</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Phone</span>
-                    <span class="value">+91 87654 32109</span>
-                </div>
-                <div class="btn-group">
-                    <a href="tel:+918765432109" class="btn btn-primary">Call Now</a>
-                    <a href="#" class="btn btn-outline">View Products</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <div class="no-data">
+            <p>No suppliers available at the moment.</p>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
+

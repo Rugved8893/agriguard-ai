@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add NGO | AgriGuard AI Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a7a4b;
+            --secondary: #27ae60;
+            --dark: #1a1a1a;
+            --bg: #f8faf9;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; }
+        
+        .sidebar { width: 260px; height: 100vh; background: var(--dark); color: white; padding: 25px; position: fixed; }
+        .sidebar h2 { color: var(--secondary); font-size: 22px; margin-bottom: 30px; }
+        .nav-item { padding: 15px; border-radius: 8px; cursor: pointer; color: #bbb; transition: 0.3s; margin-bottom: 5px; }
+        .nav-item:hover, .nav-item.active { background: rgba(39, 174, 96, 0.2); color: white; }
+
+        .main { margin-left: 300px; padding: 40px; width: calc(100% - 300px); }
+        .header { margin-bottom: 30px; }
+        .badge { background: #dff5eb; color: var(--primary); padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); max-width: 600px; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        textarea { height: 100px; resize: vertical; }
+        
+        .btn { display: inline-block; padding: 12px 24px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: var(--secondary); }
+        .btn-secondary { background: #666; }
+        .btn-secondary:hover { background: #555; }
+        
+        .success-msg { background: #dff5eb; color: var(--primary); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .error-msg { background: #fdeaea; color: #e74c3c; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        
+        .existing-data { margin-top: 30px; }
+        .data-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; }
+        .data-item { background: #f8faf9; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
+        .data-item h4 { margin: 0 0 5px; color: var(--dark); }
+        .data-item p { margin: 0; font-size: 12px; color: #666; }
+        .data-item .delete-btn { color: #e74c3c; font-size: 12px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fa-solid fa-leaf"></i> AgriGuard AI</h2>
+        <div class="nav-item" onclick="window.location='/'"><i class="fa-solid fa-chart-line"></i> Risk Analytics</div>
+        <div class="nav-item" onclick="window.location='/government'"><i class="fa-solid fa-building-columns"></i> Government Bodies</div>
+        <div class="nav-item" onclick="window.location='/ngo'"><i class="fa-solid fa-hands-helping"></i> NGO</div>
+        <div class="nav-item" onclick="window.location='/dashboard'"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
+        <div class="nav-item" onclick="window.location='/suppliers'"><i class="fa-solid fa-shop"></i> Fertilizer Suppliers</div>
+        <div class="nav-item active" onclick="window.location='/admin/ngo'"><i class="fa-solid fa-plus-circle"></i> Add NGO</div>
+        <div class="nav-item" onclick="window.location='/admin/supplier'"><i class="fa-solid fa-plus-circle"></i> Add Supplier</div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <span class="badge">ADMIN PANEL</span>
+            <h1>Add New NGO</h1>
+            <p>Add new NGO programs for farmers</p>
+        </div>
+
+        {% if success %}
+        <div class="success-msg">
+            <i class="fa-solid fa-check-circle"></i> NGO added successfully!
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error-msg">
+            <i class="fa-solid fa-exclamation-circle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="card">
+            <form method="POST" action="/admin/ngo">
+                <div class="form-group">
+                    <label>NGO Name *</label>
+                    <input type="text" name="ngo_name" required placeholder="e.g., Green Earth Foundation">
+                </div>
+                
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea name="description" required placeholder="Describe the NGO's mission and services..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Program Type *</label>
+                    <select name="program_type" required>
+                        <option value="">Select Program Type</option>
+                        <option value="Training & Seeds">Training & Seeds</option>
+                        <option value="Micro-finance">Micro-finance</option>
+                        <option value="Irrigation Support">Irrigation Support</option>
+                        <option value="Education & Training">Education & Training</option>
+                        <option value="Organic Certification">Organic Certification</option>
+                        <option value="Integrated Support">Integrated Support</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Coverage Area *</label>
+                    <input type="text" name="coverage" required placeholder="e.g., Pan India, Rural Areas, Specific State">
+                </div>
+                
+                <div class="form-group">
+                    <label>Contact Email</label>
+                    <input type="email" name="contact_email" placeholder="email@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" placeholder="+91 98765 43210">
+                </div>
+                
+                <div class="form-group">
+                    <label>Website</label>
+                    <input type="url" name="website" placeholder="https://example.org">
+                </div>
+                
+                <button type="submit" class="btn"><i class="fa-solid fa-plus"></i> Add NGO</button>
+                <a href="/ngo" class="btn btn-secondary" style="margin-left: 10px;">View NGOs</a>
+            </form>
+        </div>
+
+        <div class="existing-data">
+            <h3>Existing NGOs ({{ ngos|length }})</h3>
+            <div class="data-list">
+                {% for ngo in ngos %}
+                <div class="data-item">
+                    <h4>{{ ngo.ngo_name }}</h4>
+                    <p>{{ ngo.program_type }} | {{ ngo.coverage }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

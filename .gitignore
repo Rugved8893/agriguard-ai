@@ -27,3 +27,4 @@ static/uploads/*
 !static/uploads/.gitkeep
 *.pyc
 model.cpython-*.pyc
+database/__pycache__/

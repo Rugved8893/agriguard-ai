@@ -28,7 +28,7 @@
         
         .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
         .card-header i { font-size: 28px; color: var(--primary); }
-        .card-header h3 { margin: 0; color: var(--dark); }
+        .card-header h3 { margin: 0; color: var(--dark); font-size: 18px; }
         
         .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
         .info-row:last-child { border-bottom: none; }
@@ -37,13 +37,15 @@
         
         .btn { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; margin-top: 15px; transition: 0.3s; }
         .btn:hover { background: var(--secondary); }
+        
+        .no-data { text-align: center; padding: 40px; color: #666; }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <h2><i class="fa-solid fa-leaf"></i> AgriGuard AI</h2>
         <div class="nav-item" onclick="window.location='/'"><i class="fa-solid fa-chart-line"></i> Risk Analytics</div>
-        <div class="nav-item" onclick="window.location='/government'"><i class="fa-solid fa-building-columns"></i> Government Bodies</div>
+        <div class="nav-item active" onclick="window.location='/government'"><i class="fa-solid fa-building-columns"></i> Government Bodies</div>
         <div class="nav-item" onclick="window.location='/ngo'"><i class="fa-solid fa-hands-helping"></i> NGO</div>
         <div class="nav-item" onclick="window.location='/dashboard'"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
         <div class="nav-item" onclick="window.location='/suppliers'"><i class="fa-solid fa-shop"></i> Fertilizer Suppliers</div>
@@ -56,103 +58,40 @@
             <p>Access government schemes, subsidies, and support programs for farmers</p>
         </div>
 
+        {% if schemes %}
         <div class="grid">
+            {% for scheme in schemes %}
             <div class="card">
                 <div class="card-header">
-                    <i class="fa-solid fa-tractor"></i>
-                    <h3>Ministry of Agriculture</h3>
+                    <i class="fa-solid fa-building-columns"></i>
+                    <h3>{{ scheme.scheme_name }}</h3>
                 </div>
                 <div class="info-row">
-                    <span class="label">Scheme Name</span>
-                    <span class="value">PM-KISAN Samman Nidhi</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Subsidy Amount</span>
-                    <span class="value">₹6,000/year</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Eligibility</span>
-                    <span class="value">All landholding farmers</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Contact</span>
-                    <span class="value">1800-XXX-XXXX</span>
-                </div>
-                <a href="#" class="btn">Apply Now</a>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-seedling"></i>
-                    <h3>National Agricultural Scheme</h3>
-                </div>
-                <div class="info-row">
-                    <span class="label">Scheme Name</span>
-                    <span class="value">Fasal Bima Yojana</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Coverage</span>
-                    <span class="value">Crop Insurance up to 100%</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Premium</span>
-                    <span class="value">2% of sum insured</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Contact</span>
-                    <span class="value">1800-XXX-YYYY</span>
-                </div>
-                <a href="#" class="btn">Learn More</a>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-water"></i>
-                    <h3>Irrigation Department</h3>
-                </div>
-                <div class="info-row">
-                    <span class="label">Scheme Name</span>
-                    <span class="value">PM-KUSUM Scheme</span>
+                    <span class="label">Department</span>
+                    <span class="value">{{ scheme.department }}</span>
                 </div>
                 <div class="info-row">
                     <span class="label">Benefit</span>
-                    <span class="value">Solar pumps for irrigation</span>
+                    <span class="value">{{ scheme.benefit_amount }}</span>
                 </div>
                 <div class="info-row">
-                    <span class="label">Subsidy</span>
-                    <span class="value">Up to 90%</span>
+                    <span class="label">Eligibility</span>
+                    <span class="value">{{ scheme.eligibility }}</span>
                 </div>
                 <div class="info-row">
-                    <span class="label">Contact</span>
-                    <span class="value">1800-11-zzzz</span>
+                    <span class="label">Phone</span>
+                    <span class="value">{{ scheme.phone }}</span>
                 </div>
-                <a href="#" class="btn">Apply Now</a>
+                <a href="{{ scheme.website }}" target="_blank" class="btn">Apply Now</a>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa-solid fa-shop"></i>
-                    <h3>Farm Loan Waiver</h3>
-                </div>
-                <div class="info-row">
-                    <span class="label">Scheme Name</span>
-                    <span class="value">Kisan Credit Card</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Loan Limit</span>
-                    <span class="value">Up to ₹3 Lakhs</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Interest Rate</span>
-                    <span class="value">4% per annum</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Contact</span>
-                    <span class="value">1800-XXX-AAAA</span>
-                </div>
-                <a href="#" class="btn">Apply Now</a>
-            </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <div class="no-data">
+            <p>No government schemes available at the moment.</p>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
+
