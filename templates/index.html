@@ -665,7 +665,12 @@ How can I help you today?</div>
                 const data = await response.json();
                 document.getElementById('typingIndicator').classList.remove('active');
                 if (data.status === 'success') {
-                    addMessage(data.response, 'ai');
+                    // Convert response to string if it's an object
+                    let responseText = data.response;
+                    if (typeof responseText === 'object') {
+                        responseText = JSON.stringify(responseText);
+                    }
+                    addMessage(responseText, 'ai');
                 } else {
                     addMessage('Sorry, I encountered an error. Please try again.', 'ai');
                 }
